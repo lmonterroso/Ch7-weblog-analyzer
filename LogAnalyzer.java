@@ -1,6 +1,6 @@
 /**
  * Read web server data and analyse hourly access patterns.
- * 
+ * @author Luis Monterroso
  * @author David J. Barnes and Michael Kölling.
  * @version    2016.02.29
  */
@@ -30,6 +30,10 @@ public class LogAnalyzer
         reader = new LogfileReader();
     }
 
+    /**
+     * Create an object to anaylze web accesses
+     * @param getFile gives the file to be read
+     */
     public LogAnalyzer(String getFile)
     { 
         // Create the array object to hold the hourly
@@ -55,6 +59,9 @@ public class LogAnalyzer
         reader.reset();
     }
 
+    /**
+     * Analyze the daily access data from the log file.
+     */
     public void analyzeDailyData()
     {
         while(reader.hasNext()) {
@@ -65,6 +72,9 @@ public class LogAnalyzer
         reader.reset();
     }
     
+    /**
+     * Analyze the access data from the log file over a five year period.
+     */
     public void analyzeFiveYear()
     {
         while(reader.hasNext()) {
@@ -75,6 +85,10 @@ public class LogAnalyzer
         }
         reader.reset();   
     }
+    
+    /**
+     * Analyze the monthly access data from the log file.
+     */
     public void analyzeMonthlyData()
     {
         while(reader.hasNext()) {
@@ -84,6 +98,10 @@ public class LogAnalyzer
         }
         reader.reset();
     }
+    /**
+     * Finds the hour with the most accesses
+     * @return the value(0-23) of the busiest hour
+     */
     public int busiestHour()
     {
         int busy = 0;
@@ -100,6 +118,10 @@ public class LogAnalyzer
         return index;
     }
     
+    /**
+     * Finds the hour with the least accesses
+     * @return the value(0-23) of the quietest hour
+     */
     public int quietestHour()
     {
         int busy = hourCounts[0];
@@ -116,6 +138,10 @@ public class LogAnalyzer
         return index;
     }
     
+    /**
+     * Finds the two hour period with the most accesses
+     * @return the value of the first hour in the two hour period
+     */
     public int busiestTwoHour()
     {
        int busy = 0;
@@ -132,6 +158,10 @@ public class LogAnalyzer
         return index;
     }
     
+    /**
+     * Finds the day with the most accesses
+     * @return the value(1-28) of the busiest day
+     */
     public int busiestDay()
     {
        int busy = 0;
@@ -147,6 +177,10 @@ public class LogAnalyzer
         }
         return index; 
     }
+    /**
+     * Finds the day with the least accesses
+     * @return the value(1-28) of the quietest day
+     */
     public int quietestDay()
     {
        int busy = dayCounts[1];
@@ -163,6 +197,9 @@ public class LogAnalyzer
         return index; 
     }
     
+    /**
+     * Finds the total number of accesses per month
+     */
     public void totalAccessesPerMonth()
     {
         System.out.println("Month: Accesses");
@@ -171,6 +208,9 @@ public class LogAnalyzer
         }
     }
     
+    /**
+     * Finds the month with the least accesses
+     */
     public void quietestMonth()
     {
        int busy = fiveYear[0][1];
@@ -194,6 +234,9 @@ public class LogAnalyzer
         
     }
     
+    /**
+     * Finds the month with the most accesses
+     */
     public void busiestMonth()
     {
        int busy = 0;
@@ -238,7 +281,8 @@ public class LogAnalyzer
     }
     
     /**
-     * 
+     * Finds the total number of times the site was accessed
+     * @return the total number of accesses
      */
     public int numberOfAccessors()
     {
@@ -252,6 +296,9 @@ public class LogAnalyzer
         return total;
     }
     
+    /**
+     * Finds the average number of accesses per month and prints them out
+     */
     public void averageAccessesPerMonth()
     {
         System.out.println("Month: Average Accesses");
